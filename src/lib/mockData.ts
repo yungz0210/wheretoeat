@@ -1,10 +1,12 @@
 export type CuisineType = "Malaysian" | "Mamak" | "Kopitiam" | "Cafe" | "Healthy" | "Macro-Friendly" | "Italian" | "Asian" | "Fast Food";
+export type LifestyleGoal = "Macro-Friendly" | "Low-Calorie" | "Comfort Food" | "Cheat Meal";
 export type PriceRange = "$" | "$$" | "$$$";
 
 export interface Restaurant {
   id: string;
   name: string;
   cuisine: CuisineType[];
+  lifestyle: LifestyleGoal[];
   price: PriceRange;
   rating: number;
   reviews: number;
@@ -19,6 +21,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "1",
     name: "Nasi Lemak Antarabangsa",
     cuisine: ["Malaysian"],
+    lifestyle: ["Comfort Food"],
     price: "$",
     rating: 4.5,
     reviews: 1205,
@@ -30,6 +33,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "2",
     name: "Ampang Yong Tau Foo",
     cuisine: ["Malaysian", "Asian"],
+    lifestyle: ["Low-Calorie"],
     price: "$$",
     rating: 4.3,
     reviews: 850,
@@ -41,6 +45,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "3",
     name: "Pelita Nasi Kandar",
     cuisine: ["Mamak", "Malaysian"],
+    lifestyle: ["Comfort Food"],
     price: "$",
     rating: 4.1,
     reviews: 2100,
@@ -52,6 +57,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "4",
     name: "The Daily Fix Cafe",
     cuisine: ["Cafe", "Healthy"],
+    lifestyle: ["Comfort Food"],
     price: "$$",
     rating: 4.6,
     reviews: 640,
@@ -63,6 +69,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "5",
     name: "Macro Kitchen",
     cuisine: ["Macro-Friendly", "Healthy"],
+    lifestyle: ["Macro-Friendly", "Low-Calorie"],
     price: "$$$",
     rating: 4.8,
     reviews: 320,
@@ -74,6 +81,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "6",
     name: "Chong Kok Kopitiam",
     cuisine: ["Kopitiam", "Malaysian"],
+    lifestyle: ["Comfort Food"],
     price: "$",
     rating: 4.4,
     reviews: 1540,
@@ -85,6 +93,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "7",
     name: "Green Bowl Salad Bar",
     cuisine: ["Healthy", "Macro-Friendly"],
+    lifestyle: ["Low-Calorie", "Macro-Friendly"],
     price: "$$",
     rating: 4.5,
     reviews: 410,
@@ -96,6 +105,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "8",
     name: "KGB - Killer Gourmet Burgers",
     cuisine: ["Fast Food"],
+    lifestyle: ["Cheat Meal", "Comfort Food"],
     price: "$$",
     rating: 4.2,
     reviews: 890,
@@ -107,6 +117,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "9",
     name: "La Risata",
     cuisine: ["Italian"],
+    lifestyle: ["Comfort Food"],
     price: "$$$",
     rating: 4.7,
     reviews: 580,
@@ -118,6 +129,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "10",
     name: "Village Park Restaurant",
     cuisine: ["Malaysian"],
+    lifestyle: ["Comfort Food", "Cheat Meal"],
     price: "$$",
     rating: 4.6,
     reviews: 3100,
@@ -129,6 +141,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "11",
     name: "Lean & Mean Meals",
     cuisine: ["Macro-Friendly", "Healthy"],
+    lifestyle: ["Macro-Friendly", "Low-Calorie"],
     price: "$$",
     rating: 4.4,
     reviews: 215,
@@ -140,6 +153,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "12",
     name: "Murni Discovery",
     cuisine: ["Mamak", "Asian"],
+    lifestyle: ["Comfort Food", "Cheat Meal"],
     price: "$",
     rating: 4.3,
     reviews: 1800,
@@ -151,6 +165,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "13",
     name: "VCR",
     cuisine: ["Cafe"],
+    lifestyle: ["Comfort Food"],
     price: "$$$",
     rating: 4.5,
     reviews: 950,
@@ -162,6 +177,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "14",
     name: "Din Tai Fung",
     cuisine: ["Asian"],
+    lifestyle: ["Comfort Food"],
     price: "$$$",
     rating: 4.8,
     reviews: 4200,
@@ -173,6 +189,7 @@ export const mockRestaurants: Restaurant[] = [
     id: "15",
     name: "Salad Atelier",
     cuisine: ["Healthy", "Fast Food"],
+    lifestyle: ["Low-Calorie", "Macro-Friendly"],
     price: "$$",
     rating: 4.2,
     reviews: 670,

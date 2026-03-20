@@ -1,11 +1,12 @@
 "use client";
 
-import { CuisineType } from "@/lib/mockData";
+import { CuisineType, LifestyleGoal } from "@/lib/mockData";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export interface FilterState {
   cuisine: string;
+  lifestyle?: string;
   maxDistance: string;
   price: string;
 }
@@ -17,6 +18,7 @@ interface FilterProps {
 
 export function FilterControls({ filters, setFilters }: FilterProps) {
   const cuisineOptions: (CuisineType | "All")[] = ["All", "Malaysian", "Mamak", "Kopitiam", "Cafe", "Healthy", "Macro-Friendly", "Italian", "Asian", "Fast Food"];
+  const lifestyleOptions: (LifestyleGoal | "All")[] = ["All", "Macro-Friendly", "Low-Calorie", "Comfort Food", "Cheat Meal"];
   const distanceOptions = ["1", "3", "5", "10", "Any"];
   const priceOptions = ["All", "$", "$$", "$$$"];
 
@@ -34,6 +36,22 @@ export function FilterControls({ filters, setFilters }: FilterProps) {
           </SelectTrigger>
           <SelectContent>
             {cuisineOptions.map((option) => (
+              <SelectItem key={option} value={option}>
+                {option}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex-1">
+        <Label className="text-muted-foreground font-semibold mb-2 block">Lifestyle Goal</Label>
+        <Select value={filters.lifestyle || "All"} onValueChange={(val) => handleFilterChange("lifestyle", val || "All")}>
+          <SelectTrigger className="w-full bg-background rounded-xl">
+            <SelectValue placeholder="Select Goal" />
+          </SelectTrigger>
+          <SelectContent>
+            {lifestyleOptions.map((option) => (
               <SelectItem key={option} value={option}>
                 {option}
               </SelectItem>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { mockRestaurants } from "@/lib/mockData";
 import { calculateDistance } from "@/lib/utils";
 import { GeolocationButton } from "@/components/GeolocationButton";
@@ -14,9 +14,34 @@ export default function Home() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     cuisine: "All",
+    lifestyle: "All",
     maxDistance: "Any",
     price: "All",
   });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("whereToEatFilters");
+    // Use timeout to let mount finish before triggering setFilters,
+    // avoiding synchronous setState during effect phase
+    setTimeout(() => {
+      if (saved) {
+        try {
+          setFilters(JSON.parse(saved));
+        } catch (error) {
+          console.error("Failed to parse filters from local storage", error);
+        }
+      }
+      setIsMounted(true);
+    }, 0);
+  }, []);
+
+  // Save filters to local storage whenever they change
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem("whereToEatFilters", JSON.stringify(filters));
+    }
+  }, [filters, isMounted]);
 
   const handleLocationFound = (lat: number, lng: number) => {
     setUserLocation({ lat, lng });
@@ -35,6 +60,11 @@ export default function Home() {
       .filter((restaurant) => {
         // Cuisine Filter
         if (filters.cuisine !== "All" && !restaurant.cuisine.includes(filters.cuisine as never)) {
+          return false;
+        }
+
+        // Lifestyle Filter
+        if (filters.lifestyle && filters.lifestyle !== "All" && !restaurant.lifestyle?.includes(filters.lifestyle as never)) {
           return false;
         }
 
